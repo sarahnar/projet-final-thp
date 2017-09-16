@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Restaurant builder</h1>
+
+        <h3>Créez votre site de restaurant en ligne en quelque minute!</h3>
+        <div style="margin-top: 30px;">
+            <% if user_signed_in? %>
+            <%= link_to "Acceder a mon compte", "/restaurants", :class => "btn" %>
+            <% else %>
+            <%= link_to "Creez votre compte maintenant !", new_user_registration_path, :class => "btn btn-primary" %>
+            <%= link_to "Acceder a mon compte", signin_path, :class => "btn" %>
+            <% end %>
+        </div>
+    </div>
+    <h3>Ces restaurants nous font déjà confiance:<h3>
+    <div id="main-container">
+        <% @restaurants.each do |restaurant| %>
+            <p><%= link_to restaurant.name, "/restaurant/" + restaurant.id.to_s %></p>
+        <% end %>
+    </div>
+</div>

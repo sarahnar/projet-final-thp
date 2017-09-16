@@ -1,0 +1,12 @@
+I"Ë(function() {
+  $('document').ready((function(_this) {
+    return function() {
+      alert('ok');
+      return $('#myModal').modal({
+        keyboard: false
+      });
+    };
+  })(this));
+
+}).call(this);
+:ET

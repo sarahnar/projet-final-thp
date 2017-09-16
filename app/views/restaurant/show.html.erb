@@ -1,0 +1,106 @@
+<%= render 'components/header_restaurant' %>
+
+<%= render :partial => 'components/carousel_restaurant', :locals => { :carousels => @carousels } %>
+
+<div class="container" style="border-left: 1px solid #DDD; border-right: 1px solid #DDD">
+    <div class="row" id="carte">
+        <div class="col-8" style="border-right: 1px solid #DDD; text-align: center">
+            <img src="<%= @restaurant.menu %>" alt="menu">
+        </div>
+        <div class="col-4">
+            <div id="opening">
+                <div>
+                    Actuellement:
+
+                    <% if @isOpen %>
+                    <span style="background-color: green; color: white; border-radius: 3px;">OUVERT</span>
+                    <% else %>
+                    <span style="background-color: red; color: white; border-radius: 3px;">FERMÉ</span>
+                    <% end %>
+                </div>
+
+                Ouvert de 
+                <% @openings.each_with_index do |opening, index| %>
+                    <% if index == @openings.count - 1 && index > 0 %>
+                        et de
+                    <% end %>
+                    <% if index > 0 && index < @openings.count - 1 %>
+                        , de
+                    <% end %>
+
+                    <%= opening.open_at %>h à <%= opening.close_at %>h
+                <% end %>
+            </div>
+            <div>
+                <i class="fa fa-maps"></i>Situé à <%= @restaurant.city %> <%= @restaurant.zipcode %>
+            </div>
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d482.85945616965483!2d-61.082007095980224!3d14.49182715259781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x68d886e7647a4dc1!2sKaban&#39;+Ylan!5e0!3m2!1sen!2s!4v1505513115509" style="width:100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <div>
+                <button class="reserve-now btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Réservez maintenant
+                </button>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i><%= @restaurant.phone %>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <%= form_tag("/restaurant/" + @restaurant.id.to_s + "/reservation", method: "post") do %>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reservation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Pour quand voulez vous reserver ?</label>
+                        <select name="when_date" id="when_date">
+                            <% 5.times.each do |i| %>
+                                <option value="<%= i %>"><%= (Time.now + i.day).strftime('%e %B') %></option>
+                            <% end %>
+                        </select>
+                        <select name="when_hour" id="when_hour">
+                            <% @openings.each do |opening| %>
+                                <% (opening.close_at - opening.open_at).times.each do |i| %>
+                                    <option value="<%= opening.open_at + i %>"><%= opening.open_at + i %>h</option>
+                                <% end %>
+                            <% end %>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-8">
+                            <label>Sur quel numéro pouvons-nous valider la reservation ?</label>
+                            <input class="form-control" name="phone" id="phone" placeholder="06 96 ...">
+                        </div>
+                        <div class="form-group col-4">
+                            <label>Pour combien de personnes?</label>
+                            <select name="person" id="person" class="form-control">
+                                <% 12.times.each do |i| %>
+                                    <option value="<%= i + 1 %>"><%= i + 1 %> Personne<%= i + 1 > 1 ? 's' : '' %></option>
+                                <% end %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <%= submit_tag("Reserver") %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<% if current_user && current_user.id == @restaurant.user_id %>
+<div style="background-color: #343a40 !important;position:fixed; bottom:0; left:0; border-top-right-radius: 10px; width: 150px; height: 50px; text-align: center;">
+    <span style="position: relative; top: 15px;"><%= link_to "Admin panel", "/restaurant/" + @restaurant.id.to_s + "/edit", :style => "color: white" %></span>
+</div>
+<% end %>

@@ -55,48 +55,48 @@ Restaurant.create!([{
 Carousel.destroy_all
 Carousel.create!([{
   id: 1,
-  image: 'https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/fr/cp0/e15/q65/16300364_1241733639215059_7542487908085703033_o.jpg?oh=7ca7299128ff0ace716e20ac3ebc6e87&oe=5A44A213',
+  image: '/assets/image.jpg',
   title: 'Kaban Ylan',
-  baseline: 'Venez déguster notre fricassé de chatrou !',
-  offset: -255,
+  baseline: 'Venez déguster notre salade de la mer !',
+  offset: '',
   color: '#444',
-  restaurant_id: 3
+  restaurant_id: 3 #kaban ylan
 },{
   id: 2,
-  image: 'https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/fr/cp0/e15/q65/16402692_1241269175928172_9017435609611548301_o.jpg?oh=cf0632cb2bf2b0e1425bfeeb8f036eb3&oe=5A5486B2',
+  image: '/assets/image.jpg',
   title: '',
   baseline: '',
-  offset: -300,
-  restaurant_id: 3
+  offset: '',
+  restaurant_id: 3 #kaban ylan
 },{
   id: 3,
-  image: 'https://media-cdn.tripadvisor.com/media/photo-s/0d/30/72/7d/photo2jpg.jpg',
+  image: '/assets/image.jpg',
   title: '',
   baseline: '',
   offset: '',
-  restaurant_id: 3
+  restaurant_id: 3 #kaban ylan
 },{
   id: 4,
-  image: 'https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/fr/cp0/e15/q65/16300364_1241733639215059_7542487908085703033_o.jpg?oh=7ca7299128ff0ace716e20ac3ebc6e87&oe=5A44A213',
-  title: 'Kaban Ylan',
-  baseline: 'Venez déguster notre fricassé de chatrou !',
+  image: '/assets/terasse.JPG',
+  title: 'Chez Rico',
+  baseline: 'Venez profiter!',
   offset: -255,
   color: '#444',
-  restaurant_id: 2
+  restaurant_id: 2 #chez rico
 },{
   id: 5,
-  image: 'https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/fr/cp0/e15/q65/16402692_1241269175928172_9017435609611548301_o.jpg?oh=cf0632cb2bf2b0e1425bfeeb8f036eb3&oe=5A5486B2',
+  image: '/assets/terasse.JPG',
   title: '',
   baseline: '',
-  offset: -300,
-  restaurant_id: 2
+  offset: -255,
+  restaurant_id: 2 #chez rico
 },{
   id: 6,
-  image: 'https://media-cdn.tripadvisor.com/media/photo-s/0d/30/72/7d/photo2jpg.jpg',
+  image: '/assets/terasse.JPG',
   title: '',
   baseline: '',
-  offset: '',
-  restaurant_id: 2
+  offset: -255,
+  restaurant_id: 2 #chez rico
 }])
 
 Opening.destroy_all
@@ -114,10 +114,10 @@ Opening.create!([{
   id: 3,
   open_at: 11,
   close_at: 16,
-  restaurant_id: 3
+  restaurant_id: 3 #kaban ylan
 },{
   id: 4,
   open_at: 19,
   close_at: 22,
-  restaurant_id: 3
+  restaurant_id: 3 #kaban ylan
 }])

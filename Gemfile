@@ -8,8 +8,6 @@ gem 'sass-rails',         '~> 5.0'
 gem 'sprockets-rails',    '~> 3.2', '>= 3.2.1'
 gem 'jquery-rails',       '~> 4.3', '>= 4.3.1'
 gem 'uglifier',           '>= 1.3.0'
-gem 'therubyracer', platforms: :ruby
-
 gem 'coffee-rails',   '~> 4.2'
 gem 'turbolinks',     '~> 5'
 gem 'jbuilder',       '~> 2.5'
@@ -21,6 +19,7 @@ gem 'rails-html-sanitizer', '~> 1.0', '>= 1.0.3'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -28,8 +27,7 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
-group :development do
-  gem 'sqlite3' 
+group :development do 
   # Access an IRB console  by using <%= console %> anywhere in the code.
   gem 'web-console',    '>= 3.3.0'
   gem 'listen',         '>= 3.0.5', '< 3.2'
@@ -40,6 +38,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'therubyracer', platforms: :ruby
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

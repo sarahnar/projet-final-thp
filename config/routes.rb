@@ -20,5 +20,9 @@ Rails.application.routes.draw do
   post '/opening/:id_restaurant/add', to: 'opening#add'
   get '/opening/:id_opening/destroy', to: 'opening#destroy'
 
+  post '/carousel/:id_restaurant/add', to: 'carousel#add'
+  get '/carousel/:id_carousel/destroy', to: 'carousel#destroy'
+
+#  post '/restaurant/:id_restaurant/update', to: 'restaurant#edit'
   root 'restaurant#home'
 end

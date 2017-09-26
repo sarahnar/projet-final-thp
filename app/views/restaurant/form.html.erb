@@ -59,7 +59,7 @@
                 <h3>Ajouter une nouvelle plage horaire</h3>
                 <%= form_tag("/opening/" + @restaurant.id.to_s + "/add", method: 'post') do %>
                     <div class="form-group">
-                        <label>Heure d'ouverture</label>
+                        <label>Heure douverture</label>
                         <input class="form-control" name="open_at" id="open_at" placeholder="18">
                     </div>
                     <div class="form-group">
@@ -91,7 +91,34 @@
                     </li>
                     <% end %>
                 </ul>
+            </div> # affichage carousels image 
+            <div class="col-12">
+                <h3>Images principales</h3>
+                <ul class="list-group">
+                <% @carousels.each_with_index do |carousel, i| %>
+                    <li class="list-group-item">
+                ## <%= @isEdit ? @carousel.image : '' %>
+                ##<label> Titre:</label> 
+                ##<span name="title" id="title" value="<%= @isEdit ? @carousel.title : 'non renseigné'%>"></span>
+                ##<label> Baseline</label>
+                ##<span value="<%= @isEdit ? @carousel.baseline : '' %>"></span>
+                ##<label> Couleur texte:</label>
+                ## <span value="<%= @isEdit ? @carousel.color : '' %>"></span>
+                ##<label> offset:</label>
+                ## <span value="<%= @isEdit ? @carousel.offset : '' %> "></span>
+                <image class="" name="image" id="image" placeholder="lien http.." value="<%= @isEdit ? @carousel.image : '' %>"> 
+                    <span style="float: right"><%= link_to "X", "/carousel/" + carousel.id.to_s + "/destroy" %></span>
+                </li>
+            <% end %>
+            </ul>
+            <h3>Modifier images principales</h3> # modification image
+            <%= form_tag("/carousel/" + @restaurant.id.to_s + "/add", method: 'post') do %>
+            <div class="form-group">
+                <label>Lien vers une image principale</label>
+                <input class="form-control" name="url" placeholder="http://..." value="<%= @isEdit ? @restaurant.menu : '' %>">
             </div>
-        <% end %>
+            </end>
+            <% end %>
+        <% end %> <!-- # end du if edit
     </div>
 </div>

@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-<%= @isEdit ? 6 : 12 %>">
-            <%= form_tag(@isEdit ? '/restaurant/' + @restaurant.id.to_s + '/update' : "/restaurant", method: @isEdit ? 'put' : 'post') do %>
+            <%= form_tag('/restaurant' + (@isEdit ? '/' + @restaurant.id.to_s : ""), method: @isEdit ? 'put' : 'post') do %>
                 <div class="form-group">
                     <label>Nom du restaurant</label>
                     <input class="form-control" value="<%= @isEdit ? @restaurant.name : '' %>" name="name" id="name" placeholder="L'Oasis">
@@ -91,34 +91,48 @@
                     </li>
                     <% end %>
                 </ul>
-            </div> # affichage carousels image 
+			</div>
             <div class="col-12">
                 <h3>Images principales</h3>
                 <ul class="list-group">
-                <% @carousels.each_with_index do |carousel, i| %>
+                <% @carousel.each_with_index do |carousel, i| %>
                     <li class="list-group-item">
-                ## <%= @isEdit ? @carousel.image : '' %>
-                ##<label> Titre:</label> 
-                ##<span name="title" id="title" value="<%= @isEdit ? @carousel.title : 'non renseigné'%>"></span>
-                ##<label> Baseline</label>
-                ##<span value="<%= @isEdit ? @carousel.baseline : '' %>"></span>
-                ##<label> Couleur texte:</label>
-                ## <span value="<%= @isEdit ? @carousel.color : '' %>"></span>
-                ##<label> offset:</label>
-                ## <span value="<%= @isEdit ? @carousel.offset : '' %> "></span>
-                <image class="" name="image" id="image" placeholder="lien http.." value="<%= @isEdit ? @carousel.image : '' %>"> 
-                    <span style="float: right"><%= link_to "X", "/carousel/" + carousel.id.to_s + "/destroy" %></span>
-                </li>
-            <% end %>
-            </ul>
-            <h3>Modifier images principales</h3> # modification image
-            <%= form_tag("/carousel/" + @restaurant.id.to_s + "/add", method: 'post') do %>
-            <div class="form-group">
-                <label>Lien vers une image principale</label>
-                <input class="form-control" name="url" placeholder="http://..." value="<%= @isEdit ? @restaurant.menu : '' %>">
-            </div>
-            </end>
-            <% end %>
-        <% end %> <!-- # end du if edit
+						<img style="float:left; max-width: 300px; max-height: 150px;" src="<%= carousel.image %>">
+						<span style="float: right"><%= link_to "X", "/carousel/" + carousel.id.to_s + "/destroy" %></span>
+						<div><strong>Titre:</strong> <%= carousel.title && carousel.title != '' ? carousel.title : 'non renseigné' %></div>
+						<div><strong>Baseline:</strong> <%= carousel.baseline && carousel.baseline != '' ? carousel.baseline : 'non renseigné' %></div>
+						<div><strong>Couleur texte:</strong> <%= carousel.color && carousel.color != ''? carousel.color : 'non renseigné' %></label>
+						<div><strong>Offset:</strong> <%= carousel.offset && carousel.offset != '' ? carousel.offset : 'non renseigné' %></div>
+	                </li>
+    	        <% end %>
+        	    </ul>
+
+				<h3>Ajouter une image principal</h3> #add image carousel
+                <%= form_tag("/carousel/" + @restaurant.id.to_s + "/add", method: 'post') do %>
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input class="form-control" name="image" id="image" placeholder="http://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input class="form-control" name="title" id="title" placeholder="Bienvenue a l'Oasis">
+                    </div>
+                    <div class="form-group">
+                        <label>baseline</label>
+                        <input class="form-control" name="baseline" id="baseline" placeholder="Plat locaux gastronomique">
+                    </div>
+                    <div class="form-group">
+                        <label>Couleur du texte (RGB)</label>
+                        <input class="form-control" name="color" id="color" placeholder="#123123">
+                    </div>
+                    <div class="form-group">
+                        <label>Offset</label>
+                        <input class="form-control" name="offset" id="offset" placeholder="-150">
+                    </div>
+
+                    <%= submit_tag("Ajouter", :class => "btn btn-primary") %>
+                <% end %>
+			</div>
+		<% end %>
     </div>
 </div>

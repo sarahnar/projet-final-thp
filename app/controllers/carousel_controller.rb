@@ -13,13 +13,6 @@ class CarouselController < ApplicationController
             @restaurant_id = params[:id_restaurant]
             @saved = carousel.save
     
-            if @carousel.save
-              flash[:success] = "image a bien été ajouté!"
-              redirect_to "http://www.rubyonrails.org"
-            else
-              render 'new'
-            end
-          end
         end
     
         def destroy

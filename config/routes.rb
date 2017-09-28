@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post '/restaurant/:id_restaurant/reservation', to: 'restaurant#reservation'
   get '/restaurants', to: 'restaurant#list' #admin
   post '/restaurant', to: 'restaurant#create'
-  put '/restaurant/:id_restaurant', to: 'restaurant#edit'
+  put '/restaurant/:id_restaurant', to: 'restaurant#update'
   get '/restaurant/:id_restaurant/destroy', to: 'restaurant#destroy'
 
   post '/opening/:id_restaurant/add', to: 'opening#add'

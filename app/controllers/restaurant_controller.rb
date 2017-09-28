@@ -43,7 +43,7 @@ class RestaurantController < ApplicationController
             @restaurant = Restaurant.find params[:id_restaurant]
             @openings = Opening.where(restaurant_id: params[:id_restaurant])
             @reservations = Reservation.where(restaurant_id: params[:id_restaurant])
-            @carousels = Carousel.where(restaurant_id: params[:id_restaurant])
+            @carousel = Carousel.where(restaurant_id: params[:id_restaurant])
         end
     end
 
@@ -61,9 +61,18 @@ class RestaurantController < ApplicationController
         @saved = resto.save()
     end
 
-    def edit
-        @restaurant = Restaurant.find params[:id_restaurant]
-        
+    def update
+        resto = Restaurant.find params[:id_restaurant]
+        resto.name = params[:name]
+        resto.logo = params[:logo]
+        resto.city = params[:city]
+        resto.zipcode = params[:zipcode]
+        resto.address = params[:address]
+        resto.phone = params[:phone]
+        resto.place = params[:place]
+        resto.menu = params[:menu]
+		@saved = resto.save()
+		@restaurant_id = params[:id_restaurant]
     end
 
     def destroy
